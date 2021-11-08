@@ -27,7 +27,6 @@ const renderItems = (data) => {
         `
 
         cardsRestaurants.append(a);
-        console.log(a);
     });
 }
 
