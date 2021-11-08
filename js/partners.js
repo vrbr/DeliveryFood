@@ -26,6 +26,15 @@ const renderItems = (data) => {
                 </div>
         `
 
+        a.addEventListener('click', (event) => {
+            event.preventDefault();
+            const link = a.dataset.products;
+            
+            localStorage.setItem('restaurant', link);
+
+            window.location.href = 'restaurant.html';
+        })
+
         cardsRestaurants.append(a);
     });
 }
