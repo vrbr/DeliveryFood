@@ -1,7 +1,8 @@
 const cardsRestaurants = document.querySelector('.cards-restaurants');
 
 const renderItems = (data) => {
-    data.forEach(({ image, kitchen, name, price, products, stars, time_of_delivery }) => {
+    data.forEach((item) => {
+        const { image, kitchen, name, price, products, stars, time_of_delivery } = item;
         const a = document.createElement('a');
 
         a.setAttribute('href', 'restaurant.html');
@@ -20,7 +21,7 @@ const renderItems = (data) => {
                         <div class="rating">
                             ${stars}
                         </div>
-                        <div class="price">От ${price}</div>
+                        <div class="price">От ${price} ₽</div>
                         <div class="category">${kitchen}</div>
                     </div>
                 </div>
@@ -28,9 +29,8 @@ const renderItems = (data) => {
 
         a.addEventListener('click', (event) => {
             event.preventDefault();
-            const link = a.dataset.products;
             
-            localStorage.setItem('restaurant', link);
+            localStorage.setItem('restaurant', JSON.stringify(item));
 
             window.location.href = 'restaurant.html';
         })

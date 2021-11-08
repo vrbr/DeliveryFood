@@ -1,5 +1,17 @@
 const cardsMenu = document.querySelector('.cards-menu');
 
+const changeTitle = (restaurant) => {
+    const restaurantTitle = document.querySelector('.restaurant-title');
+    const rating = document.querySelector('.rating');
+    const price = document.querySelector('.price');
+    const kitchen = document.querySelector('.category');
+
+    restaurantTitle.textContent = restaurant.name;
+    rating.textContent = restaurant.stars;
+    price.textContent = `От ${restaurant.price} ₽`;
+    kitchen.textContent = restaurant.kitchen;
+}
+
 const renderItems = (data) => {
     data.forEach(({ description, id, image, name, price }) => {
         const card = document.createElement('div');
@@ -30,7 +42,11 @@ const renderItems = (data) => {
 }
 
 if (localStorage.getItem('restaurant')) {
-    fetch(`./db/${localStorage.getItem('restaurant')}`)
+    const restaurant = JSON.parse(localStorage.getItem('restaurant'));
+
+    changeTitle(restaurant);
+
+    fetch(`./db/${restaurant.products}`)
     .then((response) => response.json())
     .then((data) => {
         renderItems(data)
